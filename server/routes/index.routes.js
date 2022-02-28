@@ -1,10 +1,6 @@
 const router = require("express").Router();
 
-router.use("/places", (req, res, next) => {
-  res.json("holita")
-})
-
-module.exports = router;
 router.use("/auth", require("./auth.routes"))
+router.use("/places", require("./places.routes"))
 
 module.exports = router
