@@ -1,10 +1,12 @@
 const router = require("express").Router();
+const Places = require('./../models/Place.model')
 
 router.get("/", (req, res, next) => {
   res.json("All good in here");
 });
 
-// You put the next routes here 👇
-// example: router.use("/auth", authRoutes)
+router.use("/places", (req, res, next) => {
+  res.json("holita")
+})
 
 module.exports = router;

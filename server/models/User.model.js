@@ -10,11 +10,11 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: [true, 'Debes introducir la contraseña']
+
     },
     email: {
       type: String,
-      required: [true, 'Debes introducir la contraseña']
+      required: [true, 'Debes introducir el email']
     },
     profilePic: {
       type: String,
@@ -33,8 +33,14 @@ const userSchema = new Schema(
       ref: "Place"
     }],
     donePitches: [{
-      type: Schema.Types.ObjectId,
-      ref: "Pitch"
+      pitch: {
+        type: Schema.Types.ObjectId,
+        ref: "Pitch"
+      },
+      date: {
+        type: Date,
+        default: Date.now
+      }
     }],
     wishPitches: [{
       type: Schema.Types.ObjectId,
@@ -48,5 +54,7 @@ const userSchema = new Schema(
 );
 
 const User = model("User", userSchema);
+
+User.syncIndexes();
 
 module.exports = User;

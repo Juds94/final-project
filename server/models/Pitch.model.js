@@ -27,9 +27,7 @@ const pitchSchema = new Schema(
             type: String,
             required: true,
         },
-        // doneAt: {
-        //     type: Date,
-        // }
+
     },
     {
         timestamps: true,
