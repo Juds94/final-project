@@ -10,3 +10,6 @@ router.use("/places", (req, res, next) => {
 })
 
 module.exports = router;
+router.use("/auth", require("./auth.routes"))
+
+module.exports = router

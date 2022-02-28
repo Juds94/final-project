@@ -22,7 +22,6 @@ const userSchema = new Schema(
     },
     description: {
       type: String,
-      required: true,
     },
     role: {
       type: String,
@@ -53,7 +52,9 @@ const userSchema = new Schema(
   }
 );
 
-const User = model("User", userSchema);
+const User = model("User", userSchema)
+
+User.syncIndexes()
 
 User.syncIndexes();
 
