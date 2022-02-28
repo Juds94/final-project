@@ -25,7 +25,8 @@ const userSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ['ADMIN', 'USER', 'EQUIP']
+      enum: ['ADMIN', 'USER', 'EQUIP'],
+      default: "USER"
     },
     favPlaces: [{
       type: Schema.Types.ObjectId,
