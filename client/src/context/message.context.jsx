@@ -1,5 +1,4 @@
-const { createContext } = require("react");
-
+import React, { createContext, useState } from 'react'
 
 const MessageContext = createContext()
 

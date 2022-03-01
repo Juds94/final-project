@@ -1,7 +1,7 @@
-const { createContext } = require("react");
-import React from "react";
-import { useEffect } from "react";
-//import authService from '../services/auth.service'
+const { createContext } = require("react")
+import React from "react"
+import { useEffect, useState  } from "react"
+import authService from '../services/auth.service'
 
 const AuthContext = createContext()
 
@@ -29,7 +29,7 @@ function AuthProviderWrapper(props) {
         if (!storedToken) {
             logOutUser()
         } else {
-            authService //hay que traer el authservice
+            authService
                 .verify(storedToken)
                 .then(({ data }) => {
                     const user = data
