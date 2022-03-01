@@ -1,6 +1,8 @@
 const router = require("express").Router()
 const Place = require("./../models/Place.model")
 const Pitch = require("./../models/Pitch.model")
+const { checkRole } = require('./../middlewares/route-guard')
+const { isAuthenticated } = require("../middlewares/jwt.middleware")
 
 
 router.get("/getAllPlaces", (req, res) => {
@@ -25,7 +27,7 @@ router.get("/getOnePlace/:place_id", (req, res) => {
 })
 
 
-router.post("/savePlace", (req, res) => {
+router.post("/savePlace", isAuthenticated, checkRole("ADMIN", "EQUIP"), (req, res) => {
 
     Place
 
@@ -35,7 +37,7 @@ router.post("/savePlace", (req, res) => {
 
 })
 
-router.put("/update/:place_id", (req, res) => {
+router.put("/update/:place_id", isAuthenticated, checkRole("ADMIN", "EQUIP"), (req, res) => {
 
     const { place_id } = req.params
 
@@ -46,7 +48,7 @@ router.put("/update/:place_id", (req, res) => {
 })
 
 
-router.delete("/delete/:place_id", (req, res) => {
+router.delete("/delete/:place_id", isAuthenticated, checkRole("ADMIN", "EQUIP"), (req, res) => {
 
     const { place_id } = req.params
 

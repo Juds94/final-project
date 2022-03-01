@@ -1,6 +1,8 @@
 const router = require("express").Router()
 const Pitch = require("../models/Pitch.model")
 const Place = require("../models/Place.model")
+const { checkRole } = require('./../middlewares/route-guard')
+const { isAuthenticated } = require('./../middlewares/jwt.middleware')
 
 
 // Get all pitches
@@ -22,7 +24,7 @@ router.get("/getOnePitch/:pitch_id", (req, res) => {
 })
 
 //Create pitch
-router.get("/savePitch", (req, res) => {
+router.get("/savePitch", isAuthenticated, checkRole("ADMIN", "EQUIP"), (req, res) => {
     Place
         .find()
         .select('name _id')
@@ -31,7 +33,7 @@ router.get("/savePitch", (req, res) => {
 })
 
 
-router.post("/savePitch", (req, res) => {
+router.post("/savePitch", isAuthenticated, checkRole("ADMIN", "EQUIP"), (req, res) => {
     const { name, meters, diff, points, quickdraws, sector, place_id} = req.body
 
     Pitch
@@ -46,7 +48,7 @@ router.post("/savePitch", (req, res) => {
 })
 
 //Update pitch
-router.put("/update/:pitch_id", (req, res) => {
+router.put("/update/:pitch_id", isAuthenticated, checkRole("ADMIN", "EQUIP"), (req, res) => {
     const { pitch_id } = req.params
     const { name, meters, diff, points, quickdraws, sector } = req.body
 
@@ -58,7 +60,7 @@ router.put("/update/:pitch_id", (req, res) => {
 })
 
 //Delete pitch
-router.delete("/delete/:pitch_id", (req, res) => {
+router.delete("/delete/:pitch_id", isAuthenticated, checkRole("ADMIN", "EQUIP"), (req, res) => {
     const { pitch_id } = req.params
 
     Pitch
