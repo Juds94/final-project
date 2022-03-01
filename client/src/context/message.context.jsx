@@ -1,5 +1,4 @@
-const { createContext } = require("react");
-
+import React, { createContext, useState } from 'react'
 
 const MessageContext = createContext()
 
@@ -15,4 +14,4 @@ function MessageProviderWrapper(props) {
     )
 }
 
-export { MessageContext, MessageProviderWrapper}
+export { MessageContext, MessageProviderWrapper }

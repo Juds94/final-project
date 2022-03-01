@@ -64,7 +64,7 @@ router.put("/donePitches/:pitch_id", isAuthenticated, (req, res) => {
     const { pitch_id } = req.params
 
     User
-        .findByIdAndUpdate(req.payload._id, { $push: { donePitches: { pitch: pitch_id } } }, { new: true })
+        .findByIdAndUpdate(req.payload._id, { $push: { "donePitches": { pitch: pitch_id } } }, { new: true })
         .then(response => res.status(200).json(response))
         .catch(err => res.status(500).json(err))
 
