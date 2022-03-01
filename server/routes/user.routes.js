@@ -29,34 +29,34 @@ router.put("/edit/:user_id", (req, res) => {
 
 })
 
-router.put("/favPlaces/:place_id", (req, res) => {
+router.put("/favPlaces/:place_id", isAuthenticated, (req, res) => {
 
     const { place_id } = req.params
 
     User
-        .findByIdAndUpdate(USER_ID, { $push: { "favPlaces": place_id } }, { new: true })
+        .findByIdAndUpdate(req.payload._id, { $push: { "favPlaces": place_id } }, { new: true })
         .then(response => res.status(200).json(response))
         .catch(err => res.status(500).json(err))
 
 })
 
-router.put("/donePitches/:pitch_id", (req, res) => {
+router.put("/donePitches/:pitch_id", isAuthenticated, (req, res) => {
 
     const { pitch_id } = req.params
 
     User
-        .findByIdAndUpdate(USER_ID, { $push: { "donePitches": pitch_id } }, { new: true })
+        .findByIdAndUpdate(req.payload._id, { $push: { donePitches: { pitch: pitch_id } } }, { new: true })
         .then(response => res.status(200).json(response))
         .catch(err => res.status(500).json(err))
 
 })
 
-router.put("/wishPitches/:pitch_id", (req, res) => {
+router.put("/wishPitches/:pitch_id", isAuthenticated, (req, res) => {
 
     const { pitch_id } = req.params
 
     User
-        .findByIdAndUpdate(USER_ID, { $push: { "wishPitches": pitch_id } }, { new: true })
+        .findByIdAndUpdate(req.payload._id, { $push: { "wishPitches": pitch_id } }, { new: true })
         .then(response => res.status(200).json(response))
         .catch(err => res.status(500).json(err))
 
