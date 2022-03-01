@@ -2,14 +2,26 @@ const router = require("express").Router()
 const User = require("../models/User.model")
 const jwt = require('jsonwebtoken')
 const { isAuthenticated } = require('./../middlewares/jwt.middleware')
+const { checkRole } = require('./../middlewares/route-guard')
+
 
 
 
 router.get("/getAllUsers", (req, res) => {
 
-
     User
         .find()
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+
+})
+
+router.get("/getOneUser/:user_id", (req,res)=>{
+    const {user_id} = req.params
+
+    User
+        .findById(user_id)
+        .populate("favPlaces donePitches wishPitches")
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
@@ -18,7 +30,6 @@ router.get("/getAllUsers", (req, res) => {
 router.put("/edit/:user_id", (req, res) => {
 
     const { user_id } = req.params
-
 
     User
 
