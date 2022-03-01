@@ -21,7 +21,7 @@ router.get("/getOneUser/:user_id", (req, res) => {
 
     User
         .findById(user_id)
-        .populate("favPlaces donePitches wishPitches")
+        .populate("favPlaces donePitches.pitch wishPitches")
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
