@@ -16,8 +16,8 @@ router.get("/getAllUsers", (req, res) => {
 
 })
 
-router.get("/getOneUser/:user_id", (req,res)=>{
-    const {user_id} = req.params
+router.get("/getOneUser/:user_id", (req, res) => {
+    const { user_id } = req.params
 
     User
         .findById(user_id)
@@ -26,8 +26,16 @@ router.get("/getOneUser/:user_id", (req,res)=>{
         .catch(err => res.status(500).json(err))
 })
 
+router.put("/editOwnProfile", isAuthenticated, (req, res) => {
 
-router.put("/edit/:user_id", (req, res) => {
+
+    User
+        .findByIdAndUpdate(req.payload._id, { ...req.body }, { new: true })
+        .then(updatedProfile => res.json(updatedProfile))
+        .catch(err => res.status(500).json(err))
+})
+
+router.put("/edit/:user_id", checkRole('ADMIN'), (req, res, next) => {
 
     const { user_id } = req.params
 
