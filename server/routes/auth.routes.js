@@ -26,7 +26,7 @@ router.post("/signup", (req, res, next) => {
             const hashedPassword = bcrypt.hashSync(password, salt)
             return User.create({ ...req.body, password: hashedPassword })
         })
-
+        .then(user => res.status(200).json({ _id: user._id, username: user.username }))
         .catch(err => {
             console.log(err)
             res.status(500).json({ message: "Internal Server Error" })
