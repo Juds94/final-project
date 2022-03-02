@@ -30,8 +30,7 @@ router.get("/getOnePlace/:place_id", (req, res) => {
 router.post("/savePlace", isAuthenticated, checkRole("ADMIN", "EQUIP"), (req, res) => {
 
     Place
-
-        .create({ ...req.body })
+        .create(req.body)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
