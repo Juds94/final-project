@@ -1,11 +1,16 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import authService from '../services/auth.service'
 const { createContext } = require("react");
 
 const AuthContext = createContext()
 
+
+
 function AuthProviderWrapper(props) {
+
+    const navigate = useNavigate()
 
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
@@ -42,10 +47,14 @@ function AuthProviderWrapper(props) {
     }
 
     const logOutUser = () => {
+
+
+
         removeToken()
         setIsLoggedIn(false)
         setIsLoading(false)
         setUser(null)
+        navigate('/inicio-sesion')
     }
 
     useEffect(() => authenticateUser(), [])
