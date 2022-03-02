@@ -1,9 +1,15 @@
+import AppRoutes from './routes/AppRoutes';
 import './App.css';
+import Footer from './components/Footer/Footer'
+
 
 function App() {
   return (
-    <h1>hola!</h1>
-  );
+    <>
+    <AppRoutes/>
+    <Footer/>
+    </>
+  )
 }
 
-export default App;
+export default App
