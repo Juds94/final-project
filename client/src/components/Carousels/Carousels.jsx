@@ -2,7 +2,7 @@ import "./Carousels.css"
 import { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel'
 
-function ControlledCarousel() {
+const ControlledCarousel = ()  => {
     const [index, setIndex] = useState(0);
   
     const handleSelect = (selectedIndex, e) => {

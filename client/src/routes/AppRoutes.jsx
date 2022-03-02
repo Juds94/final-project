@@ -14,7 +14,7 @@ const AppRoutes = () => {
 
             <Route path="/" element={<IndexPage/>}/>
             <Route path="/escuelas" element={<PlacesPage/>}/>
-            <Route path="/vias" element={<PitchesPage/>}/>
+            <Route path="/vias/:place_id" element={<PitchesPage/>}/>
             <Route path="/registro" element={<SignupPage/>}/>
             <Route path="/inicio-sesion" element={<LoginPage/>}/>
             <Route path="/usuarios" element={<UsersPage/>}/>
