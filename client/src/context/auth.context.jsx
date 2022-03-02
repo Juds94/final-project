@@ -2,6 +2,11 @@ import React from "react";
 import { useEffect, useState } from "react";
 import authService from '../services/auth.service'
 const { createContext } = require("react");
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> e656c79dedd8102e48e7d120cf77497ef22feff1
 
 const AuthContext = createContext()
 
