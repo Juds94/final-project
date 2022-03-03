@@ -69,8 +69,6 @@ const SignUpForm = () => {
 
     return (
 
-
-
         <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formGroupEmail">
                 <Form.Label>Correo electrónico</Form.Label>

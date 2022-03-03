@@ -52,6 +52,10 @@ class UserService {
         return this.api.put(`/wishPitches/${pitch_id}`)
     }
 
+    addFriend = (friend_id) => {
+        return this.api.put(`/add-friend/${friend_id}`)
+    }
+
 }
 
 const userService = new UserService()

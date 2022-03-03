@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap"
 import { useParams } from "react-router-dom"
 import ListItem from "../../components/ListItem/ListItem"
 import placeService from "../../services/places.service"
+import GMap from "../../components/Map/GMap"
 
 const PitchesPage = () => {
 
@@ -11,6 +12,7 @@ const PitchesPage = () => {
     
     useEffect(() => {
         loadPlaceDetails()
+        
     }, [])
 
     const loadPlaceDetails = () => {
@@ -24,6 +26,7 @@ const PitchesPage = () => {
         
         <Container>
         <ListItem placeDetails={placeDetails}/>
+        {/* <GMap placeDetails={placeDetails} /> */}
         </Container>
       
     )

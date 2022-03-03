@@ -1,8 +1,7 @@
 import { Badge, ListGroup } from "react-bootstrap"
 
 const ListItem = ({ placeDetails }) => {
-
-    console.log(placeDetails);
+    console.log(placeDetails)
 
     return (
         placeDetails ?
@@ -18,6 +17,7 @@ const ListItem = ({ placeDetails }) => {
                             <ListGroup.Item
                                 as="li"
                                 className="d-flex justify-content-between align-items-start"
+                                key={elm._id}
                             >
                                 <div className="ms-2 me-auto">
                                     <div className="fw-bold">{elm.name}</div>

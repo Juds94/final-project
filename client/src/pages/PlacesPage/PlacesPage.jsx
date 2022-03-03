@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react"
 import { useState } from "react"
-import { Container } from "react-bootstrap"
+import { Button, Container, Modal } from "react-bootstrap"
+import NewPlaceForm from "../../components/NewPlaceForm/NewPlaceForm"
 import PlacesCard from "../../components/PlacesCard/PlacesCard"
 import { AuthContext } from "../../context/auth.context"
 import placeService from "../../services/places.service"
@@ -10,12 +11,14 @@ import placeService from "../../services/places.service"
 const PlacesPage = () => {
 
     const [places, setPlaces] = useState([])
+    const [showModal, setShowModal] = useState(false)
 
-    const { isLoggedIn } = useContext(AuthContext)
+    const { isAdmin, isEquip } = useContext(AuthContext)
 
     useEffect(() => {
-        loadPlaces()
+     loadPlaces()
     }, [])
+
 
     const loadPlaces = () => {
         placeService
@@ -24,9 +27,25 @@ const PlacesPage = () => {
             .catch(err => console.log(err))
     }
 
+    const handleModalClose = () => setShowModal(false)
+    const handleModalOpen = () => setShowModal(true)
+
     return (
         <Container>
             <h1>Todos los sectores de escalada</h1>
+
+            {isEquip  && <Button variant="outline-danger" onClick={handleModalOpen} >Danger</Button>}
+            {isAdmin  && <Button variant="outline-danger" onClick={handleModalOpen} >Danger</Button>}
+         
+            <Modal show={showModal} onHide={handleModalClose} size="lg">
+                <Modal.Header closeButton>
+                    <Modal.Title>Nueva escuela de escalada</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <NewPlaceForm closeModal={handleModalClose} refreshPlaces={loadPlaces} />
+                </Modal.Body>
+            </Modal>
+
             <PlacesCard places={places} />
         </Container>
 

@@ -21,7 +21,7 @@ router.get("/getOneUser/:user_id", (req, res) => {
 
     User
         .findById(user_id)
-        .populate("favPlaces donePitches.pitch wishPitches")
+        .populate("favPlaces donePitches.pitch wishPitches friends")
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
@@ -76,6 +76,17 @@ router.put("/wishPitches/:pitch_id", isAuthenticated, (req, res) => {
 
     User
         .findByIdAndUpdate(req.payload._id, { $push: { "wishPitches": pitch_id } }, { new: true })
+        .then(response => res.status(200).json(response))
+        .catch(err => res.status(500).json(err))
+
+})
+
+router.put("/add-friend/:user_id", isAuthenticated, (req, res) => {
+
+    const { user_id } = req.params
+
+    User
+        .findByIdAndUpdate(req.payload._id, { $push: { "friends": user_id } }, { new: true })
         .then(response => res.status(200).json(response))
         .catch(err => res.status(500).json(err))
 

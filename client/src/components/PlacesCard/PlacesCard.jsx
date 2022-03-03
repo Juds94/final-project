@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom"
-import GMap from "../Map/GMap"
+
 
 const { Card } = require("react-bootstrap")
 
-
-
 const PlacesCard = ({ places }) => {
+
 
     return (
         <>
@@ -21,7 +20,7 @@ const PlacesCard = ({ places }) => {
                                 </Card.Text>
                             </Card.ImgOverlay>
                         </Link>
-                        <GMap place={place} />
+                        
                     </Card>
                 )
             })}
