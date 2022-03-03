@@ -5,6 +5,8 @@ import PlacesCard from "../../components/PlacesCard/PlacesCard"
 import { AuthContext } from "../../context/auth.context"
 import placeService from "../../services/places.service"
 
+
+
 const PlacesPage = () => {
 
     const [places, setPlaces] = useState([])

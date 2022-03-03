@@ -54,7 +54,7 @@ function AuthProviderWrapper(props) {
         setIsLoggedIn(false)
         setIsLoading(false)
         setUser(null)
-        navigate('/inicio-sesion')
+        navigate('/')
     }
 
     useEffect(() => authenticateUser(), [])
