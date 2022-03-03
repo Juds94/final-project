@@ -19,6 +19,7 @@ const AppRoutes = () => {
             <Route path="/inicio-sesion" element={<LoginPage/>}/>
             <Route path="/usuarios" element={<UsersPage/>}/>
             <Route path="/perfil" element={<ProfilePage/>}/>
+            <Route path="*" element={<h1>404</h1>} />
 
         </Routes>
     )
