@@ -1,7 +1,10 @@
-import { Badge, ListGroup } from "react-bootstrap"
+import { Badge, ListGroup, Button } from "react-bootstrap"
+import { AuthContext } from "../../context/auth.context"
+import { useContext } from "react"
 
 const ListItem = ({ placeDetails }) => {
-    console.log(placeDetails)
+    
+const {isLoggedIn} = useContext(AuthContext)
 
     return (
         placeDetails ?
@@ -23,6 +26,7 @@ const ListItem = ({ placeDetails }) => {
                                     <div className="fw-bold">{elm.name}</div>
                                     <p>Metros: {elm.meters} | Cintas: {elm.quickdraws} | Sector: {elm.sector}</p>
                                 </div>
+                                {isLoggedIn && <Button  variant="warning"  >Añadir a vias favoritas</Button>}
                                 <Badge variant="primary" pill>
                                     {elm.diff}
                                 </Badge>

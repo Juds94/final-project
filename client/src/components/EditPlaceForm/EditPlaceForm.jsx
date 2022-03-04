@@ -104,8 +104,6 @@ const EditPlaceForm = ({ closeModal, place, refreshPlaces }) => {
         <div className="d-grid gap-2">
             <Button variant="dark" type="submit" disabled={loadingImage}>{loadingImage ? 'Espere...' : 'Modificar escuela'}</Button>
         </div>
-    
-
     </Form >
         }
         </>
