@@ -28,6 +28,10 @@ const userSchema = new Schema(
       enum: ['ADMIN', 'USER', 'EQUIP'],
       default: "USER"
     },
+    friends: [{
+      type: Schema.Types.ObjectId,
+      ref: "User"
+    }],
     favPlaces: [{
       type: Schema.Types.ObjectId,
       ref: "Place"

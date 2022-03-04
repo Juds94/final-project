@@ -11,10 +11,9 @@ export default function Map({ center, zoom, children, events }) {
         () => {
             map && map.panTo(center);
             mapRef.current.style.height = '300px'
-
         },
         [center.lat, center.lng]
-    );
+    )
 
     return (
         <div className="map-container">
