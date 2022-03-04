@@ -1,21 +1,15 @@
-import { Badge, ListGroup, Button } from "react-bootstrap"
-import { AuthContext } from "../../context/auth.context"
-import { useContext } from "react"
+import { Badge, ListGroup } from "react-bootstrap"
 
-const ListItem = ({ placeDetails }) => {
-    
-const {isLoggedIn} = useContext(AuthContext)
+const WishPitchesList = ({ userProfile }) => {
 
     return (
-        placeDetails ?
+
+        userProfile ?
             <>
-                <h1>Todas las vias de:{placeDetails.name}</h1>
+                <h1> Aquí están las vías que quieres hacer {userProfile.username}!</h1>
 
                 <ListGroup as="ol" numbered>
-
-                    {placeDetails.pitch?.map(elm => {
-
-
+                    {userProfile.wishPitches?.map(elm => {
                         return (
                             <ListGroup.Item
                                 as="li"
@@ -26,22 +20,23 @@ const {isLoggedIn} = useContext(AuthContext)
                                     <div className="fw-bold">{elm.name}</div>
                                     <p>Metros: {elm.meters} | Cintas: {elm.quickdraws} | Sector: {elm.sector}</p>
                                 </div>
-                                {isLoggedIn && <Button  variant="warning"  >Añadir a vias favoritas</Button>}
                                 <Badge variant="primary" pill>
                                     {elm.diff}
                                 </Badge>
                             </ListGroup.Item>
+
                         )
 
                     })}
-
-
-
                 </ListGroup>
             </>
             :
             <>Loading...</>
+
+
     )
+
 }
 
-export default ListItem
+export default WishPitchesList
+
