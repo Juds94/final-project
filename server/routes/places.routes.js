@@ -39,6 +39,7 @@ router.post("/savePlace", isAuthenticated, checkRole("ADMIN", "EQUIP"), (req, re
 router.put("/update/:place_id", isAuthenticated, checkRole("ADMIN", "EQUIP"), (req, res) => {
 
     const { place_id } = req.params
+   
 
     Place
         .findByIdAndUpdate(place_id, { ...req.body }, { new: true })

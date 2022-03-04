@@ -1,29 +1,69 @@
+import { useContext, useState } from "react"
 import { Link } from "react-router-dom"
+import { AuthContext } from "../../context/auth.context"
+import placeService from "../../services/places.service"
+import EditPlaceForm from "../EditPlaceForm/EditPlaceForm"
+const { Card, Button, Modal } = require("react-bootstrap")
 
+const PlacesCard = ({ places, refreshPlaces }) => {
 
-const { Card } = require("react-bootstrap")
+    const [showEditModal, setShowEditModal] = useState(false)
+    const [placeInfo, setPlaceInfo] = useState({})
 
-const PlacesCard = ({ places }) => {
+    const { isAdmin, isEquip } = useContext(AuthContext)
 
+    const handleEditModalClose = () => setShowEditModal(false)
+    const handleEditModalOpen = (place) => {
+        setPlaceInfo(place)
+        setShowEditModal(true)
+    }
 
+    const deletePlace = (place_id) =>{
+        placeService
+            .deletePlace(place_id)
+            .then(()=> refreshPlaces())
+            .catch(err => console.log(err))
+    }
+    
     return (
         <>
             {places.map(place => {
                 return (
-                    <Card className="bg-dark text-white" key={place._id}>
-                        <Link to={`/vias/${place._id}`}>
+                    
+                    <div key={place._id}>
+                        {isEquip && <Button  variant="warning" onClick={()=>handleEditModalOpen(place) } >Editar  escuela</Button>}
+                        {isAdmin && <Button  variant="warning" onClick={()=>handleEditModalOpen(place)} >Editar  escuela</Button>}
+
+                        {isEquip && <Button  variant="danger" onClick={()=>deletePlace(place._id)} >Eliminar  escuela</Button>}
+                        {isAdmin && <Button  variant="danger" onClick={()=>deletePlace(place._id)} >Eliminar  escuela</Button>}
+
+                        <Card className="bg-dark text-white" >
+
                             <Card.Img src={place.placeImg} alt="Card image" />
+
                             <Card.ImgOverlay>
-                                <Card.Title>{place.name}</Card.Title>
-                                <Card.Text>
-                                    {place.description}
-                                </Card.Text>
+                                <Link to={`/vias/${place._id}`}>
+                                    <Card.Title>{place.name}</Card.Title>
+                                    <Card.Text>
+                                        {place.description}
+                                    </Card.Text>
+                                </Link>
                             </Card.ImgOverlay>
-                        </Link>
-                        
-                    </Card>
+
+                        </Card>
+                        </div>
+                    
                 )
             })}
+
+            <Modal  show={showEditModal} onHide={handleEditModalClose} size="lg">
+                <Modal.Header closeButton>
+                    <Modal.Title>Editar escuela de escalada</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {placeInfo && <EditPlaceForm refreshPlaces={refreshPlaces} closeModal={handleEditModalClose}  place={placeInfo} /> }
+                </Modal.Body>
+            </Modal>
 
         </>
     )

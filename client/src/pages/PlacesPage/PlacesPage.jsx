@@ -12,6 +12,7 @@ const PlacesPage = () => {
 
     const [places, setPlaces] = useState([])
     const [showModal, setShowModal] = useState(false)
+    
 
     const { isAdmin, isEquip } = useContext(AuthContext)
 
@@ -30,12 +31,13 @@ const PlacesPage = () => {
     const handleModalClose = () => setShowModal(false)
     const handleModalOpen = () => setShowModal(true)
 
+
     return (
         <Container>
             <h1>Todos los sectores de escalada</h1>
 
-            {isEquip  && <Button variant="outline-danger" onClick={handleModalOpen} >Danger</Button>}
-            {isAdmin  && <Button variant="outline-danger" onClick={handleModalOpen} >Danger</Button>}
+            {isEquip  && <Button variant="outline-success" onClick={handleModalOpen} >Crear nueva escuela</Button>}
+            {isAdmin  && <Button variant="outline-success" onClick={handleModalOpen} >Crear nueva escuela</Button>}
          
             <Modal show={showModal} onHide={handleModalClose} size="lg">
                 <Modal.Header closeButton>
@@ -46,7 +48,7 @@ const PlacesPage = () => {
                 </Modal.Body>
             </Modal>
 
-            <PlacesCard places={places} />
+            <PlacesCard places={places} refreshPlaces={loadPlaces} />
         </Container>
 
     )

@@ -57,7 +57,6 @@ const SignUpForm = () => {
         authService
             .signup(signupForm)
             .then(({ data }) => {
-                console.log(data)
                 setShowMessage(true)
                 setMessageInfo({ title: 'Felicidades', desc: 'Te has registrado correctamente' })
                 navigate('/inicio-sesion')
