@@ -11,6 +11,7 @@ export default function GMap({ placeDetails }) {
     console.log(placeDetails)
     return (
         <div>
+            { placeDetails &&
             <Map
                 zoom={10}
                 center={{ lat: placeDetails.location.coordinates[0], lng: placeDetails.location.coordinates[1] }}
@@ -25,6 +26,7 @@ export default function GMap({ placeDetails }) {
                 />
 
             </Map>
+}
         </div>
     );
 }
