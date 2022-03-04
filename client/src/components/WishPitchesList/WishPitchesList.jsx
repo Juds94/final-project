@@ -1,18 +1,15 @@
 import { Badge, ListGroup } from "react-bootstrap"
 
-const ListItem = ({ placeDetails }) => {
-    console.log(placeDetails)
+const WishPitchesList = ({ userProfile }) => {
 
     return (
-        placeDetails ?
+
+        userProfile ?
             <>
-                <h1>Todas las vias de:{placeDetails.name}</h1>
+                <h1> Aquí están las vías que quieres hacer {userProfile.username}!</h1>
 
                 <ListGroup as="ol" numbered>
-
-                    {placeDetails.pitch?.map(elm => {
-
-
+                    {userProfile.wishPitches?.map(elm => {
                         return (
                             <ListGroup.Item
                                 as="li"
@@ -27,17 +24,19 @@ const ListItem = ({ placeDetails }) => {
                                     {elm.diff}
                                 </Badge>
                             </ListGroup.Item>
+
                         )
 
                     })}
-
-
-
                 </ListGroup>
             </>
             :
             <>Loading...</>
+
+
     )
+
 }
 
-export default ListItem
+export default WishPitchesList
+
