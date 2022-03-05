@@ -29,7 +29,6 @@ router.get("/getOneUser/:user_id", (req, res) => {
 
 router.put("/editOwnProfile", isAuthenticated, (req, res) => {
 
-
     User
         .findByIdAndUpdate(req.payload._id, { ...req.body }, { new: true })
         .then(updatedProfile => res.json(updatedProfile))

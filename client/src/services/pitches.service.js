@@ -32,7 +32,7 @@ class PitchesService {
     }
 
     savePitch = (pitch, place_id) => {
-        return this.api.post('/savePitch', pitch)
+        return this.api.post('/savePitch', pitch, place_id)
     }
 
     updatePitch = (pitch, pitch_id) => {

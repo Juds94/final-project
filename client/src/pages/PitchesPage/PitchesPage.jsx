@@ -47,7 +47,7 @@ const PitchesPage = () => {
                 </Modal.Body>
             </Modal>
 
-            <ListItem placeDetails={placeDetails} refreshPitches={loadPlaceDetails}/>
+            <ListItem placeDetails={placeDetails} refreshPitches={loadPlaceDetails} closeModal={handleModalClose}/>
             <GMap placeDetails={placeDetails} />
 
         </Container>
