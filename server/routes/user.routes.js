@@ -9,8 +9,9 @@ const { checkRole } = require('./../middlewares/route-guard')
 
 router.get("/getAllUsers", (req, res) => {
 
+    let { words } = req.body
     User
-        .find()
+        .find({ username: { $regex: words, $options: "i" } }).limit(10)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 

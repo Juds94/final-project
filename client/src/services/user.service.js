@@ -22,8 +22,8 @@ class UserService {
 
 
 
-    getAllUsers = () => {
-        return this.api.get('/getAllUsers')
+    getAllUsers = (words) => {
+        return this.api.get('/getAllUsers', words)
     }
 
 
