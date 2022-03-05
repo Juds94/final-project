@@ -1,6 +1,18 @@
-import { Badge, ListGroup } from "react-bootstrap"
+import { useContext } from "react"
+import { Badge, Button, ListGroup } from "react-bootstrap"
+import { AuthContext } from "../../context/auth.context"
+import userService from "../../services/user.service"
 
 const WishPitchesList = ({ userProfile }) => {
+
+    const {isLoggedIn} = useContext(AuthContext)
+
+    const addDonePitch = (pitch_id) =>{
+        userService
+            .addDonePitches(pitch_id)
+            
+            .catch(err => console.log(err))    
+    }
 
     return (
 
@@ -20,6 +32,7 @@ const WishPitchesList = ({ userProfile }) => {
                                     <div className="fw-bold">{elm.name}</div>
                                     <p>Metros: {elm.meters} | Cintas: {elm.quickdraws} | Sector: {elm.sector}</p>
                                 </div>
+                                {isLoggedIn && <Button onClick={()=> addDonePitch(elm._id)} variant="warning" >Vía encadenada</Button>}
                                 <Badge variant="primary" pill>
                                     {elm.diff}
                                 </Badge>

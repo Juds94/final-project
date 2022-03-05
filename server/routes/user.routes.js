@@ -9,8 +9,9 @@ const { checkRole } = require('./../middlewares/route-guard')
 
 router.get("/getAllUsers", (req, res) => {
 
+    let {words} = req.body
     User
-        .find()
+        .find({username: {$regex: words, "$options": "i"  }}).limit(10)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
@@ -48,6 +49,17 @@ router.put("/edit/:user_id", checkRole('ADMIN'), (req, res, next) => {
 
 })
 
+router.put("/removeFavPlaces/:place_id", isAuthenticated, (req, res) => {
+
+    const { place_id } = req.params
+
+    User
+        .findByIdAndUpdate(req.payload._id, { $pull: { "favPlaces": place_id } }, { new: true })
+        .then(response => res.status(200).json(response))
+        .catch(err => res.status(500).json(err))
+
+})
+
 router.put("/favPlaces/:place_id", isAuthenticated, (req, res) => {
 
     const { place_id } = req.params
@@ -65,6 +77,17 @@ router.put("/donePitches/:pitch_id", isAuthenticated, (req, res) => {
 
     User
         .findByIdAndUpdate(req.payload._id, { $push: { "donePitches": { pitch: pitch_id } } }, { new: true })
+        .then(response => res.status(200).json(response))
+        .catch(err => res.status(500).json(err))
+
+})
+
+router.put("/removeWishPitches/:pitch_id", isAuthenticated, (req, res) => {
+
+    const { pitch_id } = req.params
+
+    User
+        .findByIdAndUpdate(req.payload._id, { $pull: { "wishPitches": pitch_id } }, { new: true })
         .then(response => res.status(200).json(response))
         .catch(err => res.status(500).json(err))
 

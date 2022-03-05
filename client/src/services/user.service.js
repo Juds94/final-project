@@ -14,18 +14,13 @@ class UserService {
                 config.headers = { Authorization: `Bearer ${storedToken}` }
 
             }
-
             return config
         })
-
     }
 
-
-
-    getAllUsers = () => {
-        return this.api.get('/getAllUsers')
+    getAllUsers = (words) => {
+        return this.api.get('/getAllUsers', words)
     }
-
 
     getOneUser = (user_id) => {
         return this.api.get(`/getOneUser/${user_id}`)
@@ -38,7 +33,6 @@ class UserService {
     editUser = (user_id, user) => {
         return this.api.put(`/edit/${user_id}`, user)
     }
-
 
     addFavPlaces = (place_id) => {
         return this.api.put(`/favPlaces/${place_id}`)

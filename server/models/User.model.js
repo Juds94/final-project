@@ -34,7 +34,8 @@ const userSchema = new Schema(
     }],
     favPlaces: [{
       type: Schema.Types.ObjectId,
-      ref: "Place"
+      ref: "Place",
+     
     }],
     donePitches: [{
       pitch: {
@@ -48,7 +49,8 @@ const userSchema = new Schema(
     }],
     wishPitches: [{
       type: Schema.Types.ObjectId,
-      ref: "Pitch"
+      ref: "Pitch",
+   
     }]
 
   },

@@ -13,7 +13,6 @@ const PlacesPage = () => {
     const [places, setPlaces] = useState([])
     const [showModal, setShowModal] = useState(false)
     
-
     const { isAdmin, isEquip } = useContext(AuthContext)
 
     useEffect(() => {
