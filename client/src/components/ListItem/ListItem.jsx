@@ -1,3 +1,5 @@
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import IconButton from '@mui/material/IconButton';
 import { Badge, ListGroup, Button, Modal } from "react-bootstrap"
 import { AuthContext } from "../../context/auth.context"
 import { useContext } from "react"
@@ -6,7 +8,7 @@ import pitchesService from "../../services/pitches.service"
 import { useState } from "react"
 import EditPitchForm from "../EditPitchForm/EditPitchForm"
 
-const ListItem = ({ placeDetails, refreshPitches, closeModal  }) => {
+const ListItem = ({ placeDetails, refreshPitches, closeModal }) => {
     const [isWished, setIsWished] = useState(false)
     const [showModal, setShowModal] = useState(false)
     const [pitchInfo, setPitchInfo] = useState({})
@@ -42,10 +44,10 @@ const ListItem = ({ placeDetails, refreshPitches, closeModal  }) => {
 
     const handleModalClose = () => setShowModal(false)
 
-    const handleModalOpen = (elm) =>{
-         setShowModal(true)
-         setPitchInfo(elm)
-        }
+    const handleModalOpen = (elm) => {
+        setShowModal(true)
+        setPitchInfo(elm)
+    }
 
 
     return (
@@ -73,7 +75,11 @@ const ListItem = ({ placeDetails, refreshPitches, closeModal  }) => {
                                     {isEquip && <Button onClick={() => deletePitch(elm._id)} variant="danger" >Eliminar vía</Button>}
                                     {isAdmin && <Button onClick={() => deletePitch(elm._id)} variant="danger" >Eliminar vía</Button>}
                                     {isLoggedIn && <Button onClick={() => addDonePitch(elm._id)} variant="warning" >Vía encadenada</Button>}
-                                    {isLoggedIn && <Button onClick={() => addWishPitch(elm._id)} variant="warning" >Añadir a vía a proyectos</Button>}
+                                    {/* {isLoggedIn && <Button onClick={() => addWishPitch(elm._id)} variant="warning" >Añadir a vía a proyectos</Button>} */}
+                                    {isLoggedIn && <IconButton aria-label="favorite" size="large" onClick={() => addWishPitch(elm._id)}>
+                                        <FavoriteIcon fontSize="inherit" />
+                                    </IconButton>}
+
                                     <Badge variant="primary" pill>
                                         {elm.diff}
                                     </Badge>
@@ -86,15 +92,15 @@ const ListItem = ({ placeDetails, refreshPitches, closeModal  }) => {
                     })}
 
                 </ListGroup>
-            {pitchInfo &&
-                <Modal show={showModal} onHide={handleModalClose} size="lg">
-                    <Modal.Header closeButton>
-                        <Modal.Title>Editar escuela de escalada</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        {pitchInfo && <EditPitchForm  closeModal={handleModalClose} pitch={pitchInfo} />}
-                    </Modal.Body>
-                </Modal>}
+                {pitchInfo &&
+                    <Modal show={showModal} onHide={handleModalClose} size="lg">
+                        <Modal.Header closeButton>
+                            <Modal.Title>Editar escuela de escalada</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            {pitchInfo && <EditPitchForm closeModal={handleModalClose} pitch={pitchInfo} />}
+                        </Modal.Body>
+                    </Modal>}
             </>
             :
             <>Loading...</>
