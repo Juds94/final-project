@@ -1,6 +1,5 @@
-import Stack from '@mui/material/Stack';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { useContext, useState } from "react"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../../context/auth.context"
@@ -42,11 +41,11 @@ const PlacesCard = ({ places, refreshPlaces }) => {
                 return (
 
                     <div key={place._id}>
-                    
+
 
                         <Card className="bg-dark text-white  place-card" >
 
-                            <Card.Img src={place.placeImg} alt="Card image" className="placeImg"/>
+                            <Card.Img src={place.placeImg} alt="Card image" className="placeImg" />
 
                             <Card.ImgOverlay>
                                 <Link to={`/vias/${place._id}`}>
@@ -58,20 +57,27 @@ const PlacesCard = ({ places, refreshPlaces }) => {
                             </Card.ImgOverlay>
 
                         </Card>
-                        {isEquip && <Button  variant="warning" onClick={()=>handleEditModalOpen(place) } >Editar  escuela</Button>}
-                        {isAdmin && <Button  variant="warning" onClick={()=>handleEditModalOpen(place)} >Editar  escuela</Button>}
+                        {isEquip && <Button variant="warning" onClick={() => handleEditModalOpen(place)} >Editar  escuela</Button>}
+                        {isAdmin && <Button variant="warning" onClick={() => handleEditModalOpen(place)} >Editar  escuela</Button>}
 
-                        {isEquip && <IconButton aria-label="delete" size="large" onClick={() => deletePlace(place._id)}>
+                        {isEquip && <Button variant="danger" onClick={() => deletePlace(place._id)} >Eliminar  escuela</Button>}
+                        {isAdmin && <Button variant="danger" onClick={() => deletePlace(place._id)} >Eliminar  escuela</Button>}
+
+                        {/* {isEquip && <IconButton aria-label="delete" size="large" onClick={() => deletePlace(place._id)}>
                             <DeleteIcon fontSize="inherit" />
                         </IconButton>}
 
                         {isAdmin && <IconButton aria-label="delete" size="large" onClick={() => deletePlace(place._id)}>
                             <DeleteIcon fontSize="inherit" />
+                        </IconButton>} */}
+
+                        {isLoggedIn && <IconButton aria-label="favorite" size="large" onClick={() => addFavPlace(place._id)}>
+                            <FavoriteIcon fontSize="inherit" />
                         </IconButton>}
 
-                        {isLoggedIn && <Button  variant="warning" onClick={()=>addFavPlace(place._id)} >Añadir escuela a favoritos</Button>}
-                        </div>
-                    
+                        {/* {isLoggedIn && <Button variant="warning" onClick={() => addFavPlace(place._id)} >Añadir escuela a favoritos</Button>} */}
+                    </div>
+
                 )
             })}
 
