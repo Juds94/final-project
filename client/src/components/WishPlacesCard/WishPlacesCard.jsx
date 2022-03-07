@@ -13,19 +13,19 @@ const WishPlacesCard = ({ places, refreshPlaces }) => {
     const removeFavPlace = (place_id) => {
         userService
             .removeFavPlaces(place_id)
-            .then(()=> refreshPlaces())
+            .then(() => refreshPlaces())
             .catch(err => console.log(err))
-    } 
- 
+    }
+
     return (
         <>
             {places.map(place => {
                 return (
-                    
+
                     <div key={place._id}>
 
-                        
-                       
+                        <h1> Aquí están tus escuelas favortias!</h1>
+
 
                         <Card className="bg-dark text-white place-card" >
 
@@ -41,9 +41,9 @@ const WishPlacesCard = ({ places, refreshPlaces }) => {
                             </Card.ImgOverlay>
 
                         </Card>
-                        {isLoggedIn && <Button  variant="warning" onClick={()=>removeFavPlace(place._id)} >Eliminar escuela de favoritos</Button>}
-                        </div>
-                    
+                        {isLoggedIn && <Button variant="warning" onClick={() => removeFavPlace(place._id)} >Eliminar escuela de favoritos</Button>}
+                    </div>
+
                 )
             })}
 

@@ -12,14 +12,14 @@ class UserService {
 
             if (storedToken) {
                 config.headers = { Authorization: `Bearer ${storedToken}` }
-
             }
             return config
         })
     }
 
     getAllUsers = (words) => {
-        return this.api.get('/getAllUsers', words)
+        console.log(words);
+        return this.api.post('/getAllUsers', words)
     }
 
     getOneUser = (user_id) => {

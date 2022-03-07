@@ -23,7 +23,7 @@ const UsersPage = () => {
     const loadUsersInformation = (words) => {
 
         userService
-            .getAllUsers(words)
+            .getAllUsers({ words })
             .then(({ data }) => {
                 setUsersInfo(data)
             })
