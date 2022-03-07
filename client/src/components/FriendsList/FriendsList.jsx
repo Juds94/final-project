@@ -1,3 +1,5 @@
+import DeleteIcon from '@mui/icons-material/Delete'
+import IconButton from '@mui/material/IconButton'
 import { useContext } from "react"
 import { Button, Card } from "react-bootstrap"
 import { AuthContext } from "../../context/auth.context"
@@ -32,7 +34,10 @@ const FriendsList = ({ userProfile, refreshProfileInformation }) => {
 
                     return (
                         <div>
-                            {isLoggedIn && <Button variant="warning" onClick={() => removeFriend(elm._id)} >Eliminar este usuario de tus amigos</Button>}
+                            {isLoggedIn && <IconButton aria-label="delete" size="large" onClick={() => removeFriend(elm._id)}>
+                                <DeleteIcon fontSize="inherit" />
+                            </IconButton>}
+
 
                             <Card style={{ width: '18rem' }} key={elm._id}>
                                 <Card.Img variant="top" src={elm.profilePic} />
