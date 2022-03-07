@@ -35,7 +35,6 @@ router.get("/savePitch", isAuthenticated, checkRole("ADMIN", "EQUIP"), (req, res
 
 router.post("/savePitch", isAuthenticated, checkRole("ADMIN", "EQUIP"), (req, res) => {
     const { name, meters, diff, points, quickdraws, sector, place_id} = req.body
-    
 
     Pitch
         .create({ name, meters, diff, points, quickdraws, sector })
