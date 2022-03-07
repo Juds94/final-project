@@ -46,6 +46,9 @@ const Navigation = () => {
                                     <NavLink to="/perfil">
                                         <Nav.Link as="span">Accede a tu perfil {user?.username}</Nav.Link>
                                     </NavLink>
+                                    <NavLink to="/rendimiento">
+                                        <Nav.Link as="span">Rendimiento deportivo</Nav.Link>
+                                    </NavLink>
                                     <Nav.Link as="span" onClick={logOutUser}>Cerrar sesión</Nav.Link>
                                 </>
                         }

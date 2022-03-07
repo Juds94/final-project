@@ -2,6 +2,11 @@ import { useContext } from "react"
 import { Badge, Button, ListGroup } from "react-bootstrap"
 import { AuthContext } from "../../context/auth.context"
 import userService from "../../services/user.service"
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import DeleteIcon from '@mui/icons-material/Delete'
+import IconButton from '@mui/material/IconButton'
+
+
 
 const WishPitchesList = ({ userProfile, refreshFavPitches }) => {
 
@@ -39,8 +44,20 @@ const WishPitchesList = ({ userProfile, refreshFavPitches }) => {
                                     <div className="fw-bold">{elm.name}</div>
                                     <p>Metros: {elm.meters} | Cintas: {elm.quickdraws} </p>
                                 </div>
-                                {isLoggedIn && <Button onClick={() => addDonePitch(elm._id)} variant="warning" >Vía encadenada</Button>}
-                                {isLoggedIn && <Button onClick={() => removeWishPitch(elm._id)} variant="warning" >Eliminar de proyectos</Button>}
+
+                                {isLoggedIn && <IconButton aria-label="favorite" size="large" onClick={() => addDonePitch(elm._id)}>
+                                    <CheckCircleIcon fontSize="inherit" />
+                                </IconButton>}
+
+                                {isLoggedIn && <IconButton aria-label="favorite" size="large" onClick={() => removeWishPitch(elm._id)}>
+                                    <DeleteIcon fontSize="inherit" />
+                                </IconButton>}
+
+
+
+
+
+
                                 <Badge variant="primary" pill>
                                     {elm.diff}
                                 </Badge>

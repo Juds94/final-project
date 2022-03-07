@@ -1,9 +1,12 @@
 import "./WishPlacesCard.css"
+import IconButton from '@mui/material/IconButton'
+import DeleteIcon from '@mui/icons-material/Delete'
 import { useContext, useState } from "react"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../../context/auth.context"
 import userService from "../../services/user.service"
 const { Card, Button } = require("react-bootstrap")
+
 
 
 const WishPlacesCard = ({ places, refreshPlaces }) => {
@@ -41,6 +44,11 @@ const WishPlacesCard = ({ places, refreshPlaces }) => {
                             </Card.ImgOverlay>
 
                         </Card>
+
+                        {isLoggedIn && <IconButton aria-label="favorite" size="large" onClick={() => removeFavPlace(place._id)}>
+                                <DeleteIcon fontSize="inherit" />
+                                </IconButton>}
+
                         {isLoggedIn && <Button variant="warning" onClick={() => removeFavPlace(place._id)} >Eliminar escuela de favoritos</Button>}
                     </div>
 

@@ -1,4 +1,5 @@
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import IconButton from '@mui/material/IconButton';
 import { Badge, ListGroup, Button, Modal } from "react-bootstrap"
 import { AuthContext } from "../../context/auth.context"
@@ -74,7 +75,12 @@ const ListItem = ({ placeDetails, refreshPitches, closeModal }) => {
                                     {isAdmin && <Button onClick={() => handleModalOpen(elm)} variant="warning" >Editar vía</Button>}
                                     {isEquip && <Button onClick={() => deletePitch(elm._id)} variant="danger" >Eliminar vía</Button>}
                                     {isAdmin && <Button onClick={() => deletePitch(elm._id)} variant="danger" >Eliminar vía</Button>}
-                                    {isLoggedIn && <Button onClick={() => addDonePitch(elm._id)} variant="warning" >Vía encadenada</Button>}
+                                    {/* {isLoggedIn && <Button onClick={() => addDonePitch(elm._id)} variant="warning" >Vía encadenada</Button>} */}
+
+                                    {isLoggedIn && <IconButton aria-label="favorite" size="large" onClick={() => addDonePitch(elm._id)}>
+                                        <CheckCircleIcon fontSize="inherit" />
+                                    </IconButton>} 
+
                                     {/* {isLoggedIn && <Button onClick={() => addWishPitch(elm._id)} variant="warning" >Añadir a vía a proyectos</Button>} */}
                                     {isLoggedIn && <IconButton aria-label="favorite" size="large" onClick={() => addWishPitch(elm._id)}>
                                         <FavoriteIcon fontSize="inherit" />
