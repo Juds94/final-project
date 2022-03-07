@@ -49,7 +49,6 @@ const WishPlacesCard = ({ places, refreshPlaces }) => {
                                 <DeleteIcon fontSize="inherit" />
                                 </IconButton>}
 
-                        {isLoggedIn && <Button variant="warning" onClick={() => removeFavPlace(place._id)} >Eliminar escuela de favoritos</Button>}
                     </div>
 
                 )
