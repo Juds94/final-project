@@ -127,6 +127,17 @@ router.put("/add-friend/:user_id", isAuthenticated, (req, res) => {
 
 })
 
+router.put("/removeFriend/:user_id", isAuthenticated, (req, res) => {
+
+    const { user_id } = req.params
+
+    User
+        .findByIdAndUpdate(req.payload._id, { $pull: { "friends": user_id } }, { new: true })
+        .then(response => res.status(200).json(response))
+        .catch(err => res.status(500).json(err))
+
+})
+
 
 
 

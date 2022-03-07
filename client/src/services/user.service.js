@@ -58,6 +58,10 @@ class UserService {
         return this.api.put(`/add-friend/${friend_id}`)
     }
 
+    removeFriend = (friend_id) => {
+        return this.api.put(`/removeFriend/${friend_id}`)
+    }
+
 }
 
 const userService = new UserService()

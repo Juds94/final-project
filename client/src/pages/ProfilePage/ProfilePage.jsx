@@ -8,6 +8,7 @@ import WishPitchesList from "../../components/WishPitchesList/WishPitchesList"
 import EditProfileForm from "../../components/EditProfileForm/EditProfileForm"
 import { Button, Col, Container, Modal, Row } from "react-bootstrap"
 import WishPlacesCard from "../../components/WishPlacesCard/WishPlacesCard"
+import UsersList from "../../components/UsersList/UsersList"
 
 const ProfilePage = () => {
 
@@ -42,16 +43,17 @@ const ProfilePage = () => {
                 <Row>
 
                     <Col md="4">
-                    <h1>Tu perfil</h1>
+                        <h1>Tu perfil</h1>
                         <ProfileCard userProfile={userProfile} />
                         {isLoggedIn && <Button variant="outline-success" onClick={handleModalOpen} >Edita tu perfil!</Button>}
                     </Col>
                     <Col md="8">
-                        {userProfile.wishPitches && userProfile.wishPitches.length !== 0 && <WishPitchesList userProfile={userProfile} />}
+                        {userProfile.wishPitches && userProfile.wishPitches.length !== 0 && <WishPitchesList userProfile={userProfile} refreshFavPitches={loadProfileInformation} />}
                     </Col>
+
                 </Row>
 
-                {userProfile.friends && userProfile.friends.length !== 0 && <FriendsList userProfile={userProfile} />}
+                {userProfile.friends && userProfile.friends.length !== 0 && <FriendsList userProfile={userProfile} refreshProfileInformation={loadProfileInformation} />}
 
                 {userProfile.favPlaces && userProfile.favPlaces.length !== 0 && <WishPlacesCard places={userProfile.favPlaces} refreshPlaces={loadProfileInformation} />}
 
