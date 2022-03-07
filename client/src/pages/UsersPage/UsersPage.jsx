@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useEffect } from "react"
 import { useContext } from "react"
+import { Container } from "react-bootstrap"
 import UserSearchBar from "../../components/UserSearchBar/UserSearchBar"
 import UsersList from "../../components/UsersList/UsersList"
 import { AuthContext } from "../../context/auth.context"
@@ -30,8 +31,10 @@ const UsersPage = () => {
     }
     return (
         <>
-            {usersInfo && <UsersList usersInfo={usersInfo} />}
-            <UserSearchBar handleUserSearchBar={loadUsersInformation} />
+            <Container>
+                {usersInfo && <UsersList usersInfo={usersInfo} />}
+                <UserSearchBar handleUserSearchBar={loadUsersInformation} />
+            </Container>
         </>
     )
 }

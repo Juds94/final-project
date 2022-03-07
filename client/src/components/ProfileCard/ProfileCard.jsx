@@ -1,11 +1,12 @@
 import { Card } from "react-bootstrap"
+import "./ProfileCard.css"
 
 const ProfileCard = ({ userProfile }) => {
 
     return (
         <>
 
-            <Card style={{ width: '18rem' }}>
+            <Card className="profileCard" style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={userProfile.profilePic} />
                 <Card.Body>
                     <Card.Title>Username</Card.Title>

@@ -6,7 +6,8 @@ import { AuthContext } from "../../context/auth.context"
 import FriendsList from "../../components/FriendsList/FriendsList"
 import WishPitchesList from "../../components/WishPitchesList/WishPitchesList"
 import EditProfileForm from "../../components/EditProfileForm/EditProfileForm"
-import { Button, Container, Modal } from "react-bootstrap"
+import { Button, Col, Container, Modal, Row } from "react-bootstrap"
+import WishPlacesCard from "../../components/WishPlacesCard/WishPlacesCard"
 
 const ProfilePage = () => {
 
@@ -37,13 +38,26 @@ const ProfilePage = () => {
 
     return (
         <>
-            <ProfileCard userProfile={userProfile} />
-            {userProfile.friends && userProfile.friends.length !== 0 && <FriendsList userProfile={userProfile} />}
-            {userProfile.wishPitches && userProfile.wishPitches.length !== 0 && <WishPitchesList userProfile={userProfile} />}
-
             <Container>
+                <Row>
 
-                {isLoggedIn && <Button variant="outline-success" onClick={handleModalOpen} >Edita tu perfil!</Button>}
+                    <Col md="4">
+                    <h1>Tu perfil</h1>
+                        <ProfileCard userProfile={userProfile} />
+                        {isLoggedIn && <Button variant="outline-success" onClick={handleModalOpen} >Edita tu perfil!</Button>}
+                    </Col>
+                    <Col md="8">
+                        {userProfile.wishPitches && userProfile.wishPitches.length !== 0 && <WishPitchesList userProfile={userProfile} />}
+                    </Col>
+                </Row>
+
+                {userProfile.friends && userProfile.friends.length !== 0 && <FriendsList userProfile={userProfile} />}
+
+                {userProfile.favPlaces && userProfile.favPlaces.length !== 0 && <WishPlacesCard places={userProfile.favPlaces} refreshPlaces={loadProfileInformation} />}
+
+
+
+
 
                 <Modal show={showModal} onHide={handleModalClose} size="lg">
                     <Modal.Header closeButton>

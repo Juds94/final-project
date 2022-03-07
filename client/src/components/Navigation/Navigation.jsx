@@ -24,9 +24,6 @@ const Navigation = () => {
                         <NavLink to="/">
                             <Nav.Link as="span">Inicio</Nav.Link>
                         </NavLink>
-                        <NavLink to="/vias">
-                            <Nav.Link as="span">Explora nuevas vías de escalada</Nav.Link>
-                        </NavLink>
                         <NavLink to="/escuelas">
                             <Nav.Link as="span">Descubre nuevas escuelas de escalada</Nav.Link>
                         </NavLink>

@@ -70,6 +70,17 @@ router.put("/favPlaces/:place_id", isAuthenticated, (req, res) => {
 
 })
 
+router.put("/removeFavPlaces/:place_id", isAuthenticated, (req, res) => {
+
+    const { place_id } = req.params
+
+    User
+        .findByIdAndUpdate(req.payload._id, { $pull: { "favPlaces": place_id } }, { new: true })
+        .then(response => res.status(200).json(response))
+        .catch(err => res.status(500).json(err))
+
+})
+
 router.put("/donePitches/:pitch_id", isAuthenticated, (req, res) => {
 
     const { pitch_id } = req.params

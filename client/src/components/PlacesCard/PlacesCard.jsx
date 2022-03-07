@@ -39,6 +39,22 @@ const PlacesCard = ({ places, refreshPlaces }) => {
                 return (
                     
                     <div key={place._id}>
+                    
+
+                        <Card className="bg-dark text-white  place-card" >
+
+                            <Card.Img src={place.placeImg} alt="Card image" className="placeImg"/>
+
+                            <Card.ImgOverlay>
+                                <Link to={`/vias/${place._id}`}>
+                                    <Card.Title className="text-white">{place.name}</Card.Title>
+                                    <Card.Text className="text-white">
+                                        {place.description}
+                                    </Card.Text>
+                                </Link>
+                            </Card.ImgOverlay>
+
+                        </Card>
                         {isEquip && <Button  variant="warning" onClick={()=>handleEditModalOpen(place) } >Editar  escuela</Button>}
                         {isAdmin && <Button  variant="warning" onClick={()=>handleEditModalOpen(place)} >Editar  escuela</Button>}
 
@@ -46,21 +62,6 @@ const PlacesCard = ({ places, refreshPlaces }) => {
                         {isAdmin && <Button  variant="danger" onClick={()=>deletePlace(place._id)} >Eliminar  escuela</Button>}
 
                         {isLoggedIn && <Button  variant="warning" onClick={()=>addFavPlace(place._id)} >Añadir escuela a favoritos</Button>}
-
-                        <Card className="bg-dark text-white" >
-
-                            <Card.Img src={place.placeImg} alt="Card image" />
-
-                            <Card.ImgOverlay>
-                                <Link to={`/vias/${place._id}`}>
-                                    <Card.Title>{place.name}</Card.Title>
-                                    <Card.Text>
-                                        {place.description}
-                                    </Card.Text>
-                                </Link>
-                            </Card.ImgOverlay>
-
-                        </Card>
                         </div>
                     
                 )

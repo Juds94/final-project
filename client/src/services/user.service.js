@@ -38,12 +38,20 @@ class UserService {
         return this.api.put(`/favPlaces/${place_id}`)
     }
 
+    removeFavPlaces = (place_id => {
+        return this.api.put(`/removeFavPlaces/${place_id}`)
+    })
+
     addDonePitches = (pitch_id) => {
         return this.api.put(`/donePitches/${pitch_id}`)
     }
 
     addWishPitches = (pitch_id) => {
         return this.api.put(`/wishPitches/${pitch_id}`)
+    }
+
+    removeWishPitches = (pitch_id) => {
+        return this.api.put(`/removeWishPitches/${pitch_id}`)
     }
 
     addFriend = (friend_id) => {
