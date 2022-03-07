@@ -1,3 +1,9 @@
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import Stack from '@mui/material/Stack';
+import Input from '@mui/material/IconButton'
 import React from "react"
 import { useState, useContext } from "react"
 import authService from "../../services/auth.service"
@@ -81,15 +87,20 @@ const SignUpForm = () => {
                 <Form.Label>Contraseña</Form.Label>
                 <Form.Control type="password" placeholder="Password" name="password" value={signupForm.password} onChange={handleInputChange} />
             </Form.Group>
-            <Form.Group controlId="profileImage" className="mb-3">
+            <Form.Group className="mb-3" controlId="profileImage" >
                 <Form.Label>Introduzca foto si lo desea</Form.Label>
-                <Form.Control type="file" onChange={uploadProfileImage} />
+                < Form.Control type="file" onChange={uploadProfileImage} />
             </Form.Group>
-            <button color="unique" type="submit">
+            {/* <button color="unique" type="submit">
                 Registrate
-            </button>
+            </button> */}
+            <Button variant="contained" type="submit" style={{ width: '100%' }} disableElevation>
+                Registrate
+            </Button>
+
         </Form >
     );
 }
 
 export default SignUpForm
+

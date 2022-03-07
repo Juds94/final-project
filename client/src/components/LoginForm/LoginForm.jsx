@@ -1,9 +1,12 @@
+// import { Button } from "@mui/material/Button"
+import Button from '@mui/material/Button';
 import { useState, useContext } from "react"
-import { Form, Button } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import authService from "../../services/auth.service"
 import { useNavigate } from "react-router-dom"
 import { MessageContext } from "../../context/message.context"
 import { AuthContext } from "../../context/auth.context"
+
 
 
 
@@ -62,7 +65,11 @@ function LoginForm() {
                 <Form.Control type="password" name="password" value={loginForm.password} onChange={handleInputChange} />
             </Form.Group>
 
-            <Button variant="dark" type="submit" style={{ width: '100%' }}>Iniciar sesión</Button>
+            {/* <Button variant="dark" type="submit" style={{ width: '100%' }}>Iniciar sesión</Button> */}
+            {/* <Button variant="outlined" type="submit">Inicia Sesión</Button> */}
+            <Button variant="contained" type="submit" style={{ width: '100%' }} disableElevation>
+                Inicia sesión
+            </Button>
 
         </Form>
     )
