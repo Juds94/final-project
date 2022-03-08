@@ -1,43 +1,44 @@
-import { useContext, useEffect, useState } from "react"
-import { Button, Col, Container, Row } from "react-bootstrap"
-import DiffGraphic from "../../components/DiffGraphic/DiffGraphic"
-import FriendGraphic from "../../components/FriendGraphic/FriendGraphic"
-import MetersGraphic from "../../components/MetersGraphic/MetersGraphic"
-import PitchesGraphic from "../../components/PitchesGraphic/PitchesGraphic"
-import PointsGraphic from "../../components/PointsGraphic/PointsGraphic"
-import { AuthContext } from "../../context/auth.context"
+import { useEffect, useState } from "react"
+import "./FriendGraphic.css"
+import { Col, Form, Row } from "react-bootstrap"
 import userService from "../../services/user.service"
-import "./PerformancePage.css"
+import DiffGraphic from "../DiffGraphic/DiffGraphic"
+import MetersGraphic from "../MetersGraphic/MetersGraphic"
+import PitchesGraphic from "../PitchesGraphic/PitchesGraphic"
+import PointsGraphic from "../PointsGraphic/PointsGraphic"
 
-const PerformancePage = () => {
-
-    const { user, isLoggedIn } = useContext(AuthContext)
-    const [userProfile, setUserProfile] = useState({})
+const FriendGraphic = ({ friends }) => {
     
+    const [friendId, setFriendId] = useState()
 
-    useEffect(() => {
-        user && loadProfileInformation()
-    }, [user])
-
-    useEffect(() => {
-        userProfile && getPitchByM()
-        userProfile && getPitchByDiff()
-        userProfile && getPointsByMonth()
-        userProfile && getMetersByMonth()
-    }, [userProfile])
-
-    const loadProfileInformation = () => {
-
-        userService
-            .getOneUser(user._id)
-            .then(({ data }) => {
-                setUserProfile(data)
-            })
-
-            .catch(err => console.log(err))
-
+    const handleInputChange = e => {
+        const { value } = e.target
+        setFriendId(value)
     }
 
+    const[friendProfile, setFriendProfile] = useState({})
+
+    useEffect(() => {
+        friendId && loadFriendProfileInformation()
+    }, [friendId])
+
+    const loadFriendProfileInformation = () => {
+        userService
+            .getOneUser(friendId)
+            .then(({ data }) => {
+                setFriendProfile(data)
+            })
+            .catch(err => console.log(err))
+    }
+
+    console.log(friendProfile)
+
+    useEffect(() => {
+         friendProfile && getPitchByM()
+         friendProfile && getPitchByDiff()
+         friendProfile && getPointsByMonth()
+         friendProfile && getMetersByMonth()
+    }, [friendId, friendProfile])
 
     const [data, setData] = useState([])
     const [months, setMonths] = useState({
@@ -56,7 +57,7 @@ const PerformancePage = () => {
     })
 
     const getPitchByM = () => {
-        userProfile.donePitches?.map(eachPitch => {
+        friendProfile.donePitches?.map(eachPitch => {
             if (new Date(eachPitch.date).getMonth() === 0) { setMonths(months.Ene += 1) }
             if (new Date(eachPitch.date).getMonth() === 1) { setMonths(months.Feb += 1) }
             if (new Date(eachPitch.date).getMonth() === 2) { setMonths(months.Mar += 1) }
@@ -124,7 +125,6 @@ const PerformancePage = () => {
         })
     }
 
-
     const [diffData, setDiffData] = useState([])
     const [diffPitches, setDiffPitches] = useState({
         "V": 0,
@@ -135,7 +135,8 @@ const PerformancePage = () => {
     })
 
     const getPitchByDiff = () => {
-        userProfile.donePitches?.map(eachPitch => {
+        friendProfile.donePitches?.map(eachPitch => {
+            console.log(eachPitch.pitch.points)
             if (eachPitch.pitch.points <= 0.5) { setDiffPitches({ ...diffPitches, V: diffPitches.V += 1 }) }
             else if (eachPitch.pitch.points > 0.5 && eachPitch.pitch.points <= 2) { setDiffPitches({ ...diffPitches, VI: diffPitches.VI += 1 }) }
             else if (eachPitch.pitch.points > 2 && eachPitch.pitch.points <= 3.5) { setDiffPitches({ ...diffPitches, VII: diffPitches.VII += 1 }) }
@@ -185,8 +186,7 @@ const PerformancePage = () => {
     })
 
     const getPointsByMonth = () => {
-
-        userProfile.donePitches?.map(eachPitch => {
+        friendProfile.donePitches?.map(eachPitch => {
             if (new Date(eachPitch.date).getMonth() === 0) { setMonthsPoints(monthsPoints.Ene += eachPitch.pitch.points) }
             if (new Date(eachPitch.date).getMonth() === 1) { setMonthsPoints(monthsPoints.Feb += eachPitch.pitch.points) }
             if (new Date(eachPitch.date).getMonth() === 2) { setMonthsPoints(monthsPoints.Mar += eachPitch.pitch.points) }
@@ -254,8 +254,6 @@ const PerformancePage = () => {
         })
     }
 
-
-
     const [metersData, setMetersData] = useState([])
     const [monthsMeters, setMonthsMeters] = useState({
         'Ene': 0,
@@ -274,7 +272,7 @@ const PerformancePage = () => {
 
     const getMetersByMonth = () => {
 
-        userProfile.donePitches?.map(eachPitch => {
+        friendProfile.donePitches?.map(eachPitch => {
             if (new Date(eachPitch.date).getMonth() === 0) { setMonthsMeters(monthsMeters.Ene += eachPitch.pitch.meters) }
             if (new Date(eachPitch.date).getMonth() === 1) { setMonthsMeters(monthsMeters.Feb += eachPitch.pitch.meters) }
             if (new Date(eachPitch.date).getMonth() === 2) { setMonthsMeters(monthsMeters.Mar += eachPitch.pitch.meters) }
@@ -348,69 +346,33 @@ const PerformancePage = () => {
         })
 
     }
+   
 
-    const [showFriend, setShowFriend] = useState(false)
-
-    const toggleShowFriend = () => {
-        setShowFriend(!showFriend)
-    }
-
-    
-
-
+  
 
     return (
+        <>
+            <Form.Select className="formSelect" name="friend_id" onChange={handleInputChange} aria-label="Default select example">
+                <option >Elija un amigo</option>
+                {
+                    friends.map(elm => {
+                        return (<option value={elm._id}>{elm.username}</option>)
+                    })
+                }
+            </Form.Select>
 
-        <Container>
-            <h1>Hola {userProfile && userProfile.username}</h1>
-            {!showFriend ? <Button onClick={toggleShowFriend}>Mostrar amigo</Button>
-                : <Button onClick={toggleShowFriend}>Ocultar amigo</Button>
-            }
-            
-
-            {!showFriend ?
-                <Row>
-                    <Col>
-                        <Row>
-                            <Col lg="8">
-                                <div className="PitchesGraphic">
-                                    {data.length !== 0 && <PitchesGraphic data={data} />}
-                                </div>
-                            </Col>
-                            <Col lg="4">
-                                <div className="PitchesGraphic">
-                                    {data.length !== 0 && <DiffGraphic data={diffData} />}
-                                </div>
-                            </Col>
-                            <Col lg="6">
-                                <div className="smallGraphic">
-                                    {data.length !== 0 && <PointsGraphic data={pointsData} />}
-                                </div>
-                            </Col>
-                            <Col lg="6">
-                                <div className="smallGraphic">
-                                    {metersData.length !== 0 && <MetersGraphic data={metersData} />}
-                                </div>
-                            </Col>
-                        </Row>
-                    </Col>
-                   
-                </Row>
-                :
-                <Row>
-                    <Col lg="6">
-                        <Row>
-                            <Col lg="12">
-                                <div className="PitchesGraphic">
-                                    {data.length !== 0 && <PitchesGraphic data={data} />}
-                                </div>
-                            </Col>
-                            <Col lg="12">
-                                <div className="PitchesGraphic">
-                                    {data.length !== 0 && <DiffGraphic data={diffData} />}
-                                </div>
-                            </Col>
+            <Row>
                             <Col lg="12" >
+                                <div className="PitchesGraphic">
+                                    {data.length !== 0 && <PitchesGraphic data={data} />}
+                                </div>
+                            </Col>
+                             <Col lg="12">
+                                <div className="PitchesGraphic">
+                                    {data.length !== 0 && <DiffGraphic data={diffData} />}
+                                </div>
+                            </Col>
+                           <Col lg="12">
                                 <div className="smallGraphic">
                                     {data.length !== 0 && <PointsGraphic data={pointsData} />}
                                 </div>
@@ -419,19 +381,10 @@ const PerformancePage = () => {
                                 <div className="smallGraphic">
                                     {metersData.length !== 0 && <MetersGraphic data={metersData} />}
                                 </div>
-                            </Col>
-                        </Row>
-                    </Col>
-
-                    <Col lg="6">
-                        <FriendGraphic friends={userProfile.friends}/>
-                    </Col>
-                </Row>
-            }
-
-        </Container >
-
+                            </Col> 
+                        </Row> 
+        </>
     )
 }
 
-export default PerformancePage
+export default FriendGraphic

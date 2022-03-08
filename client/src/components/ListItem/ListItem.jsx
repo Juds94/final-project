@@ -61,7 +61,7 @@ const ListItem = ({ placeDetails, refreshPitches, closeModal }) => {
                     {placeDetails.pitch?.map(elm => {
 
                         return (
-                            <>
+                           
                                 <ListGroup.Item
                                     as="li"
                                     className="d-flex justify-content-between align-items-start"
@@ -92,7 +92,7 @@ const ListItem = ({ placeDetails, refreshPitches, closeModal }) => {
                                 </ListGroup.Item>
 
 
-                            </>
+                         
                         )
 
                     })}

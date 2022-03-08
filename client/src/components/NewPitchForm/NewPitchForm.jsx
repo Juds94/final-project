@@ -31,7 +31,6 @@ const NewPitchForm = ({ closeModal, refreshPitches }) => {
             .getSavePitch()
             .then(({ data }) => {
                 setPlacesId(data)
-                console.log(data)
             })
             .catch(err => console.log(err))
     }
@@ -54,6 +53,7 @@ const NewPitchForm = ({ closeModal, refreshPitches }) => {
         pitchesService
             .savePitch({ name, meters, diff, points, quickdraws, sector, place_id })
             .then(({ data }) => {
+                console.log(data)
                 refreshPitches()
                 closeModal()
             })
@@ -67,9 +67,10 @@ const NewPitchForm = ({ closeModal, refreshPitches }) => {
             <Form.Group className="mb-3" controlId="place_id">
             <Form.Label>Escuela a la que pertenece</Form.Label>
                 <Form.Select name="place_id" onChange={handleInputChange} aria-label="Default select example">
+                <option >Elija escuela</option>
                     {
                         placesId.map(elm => {
-                            return (<option  value={elm._id}>{elm.name}</option>)
+                            return (<option value={elm._id}>{elm.name}</option>)
                         })
                     }
                 </Form.Select>
