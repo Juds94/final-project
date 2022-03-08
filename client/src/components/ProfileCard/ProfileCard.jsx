@@ -2,7 +2,7 @@ import { Card } from "react-bootstrap"
 import "./ProfileCard.css"
 
 const ProfileCard = ({ userProfile }) => {
-
+    
     return (
         <>
 
